@@ -14,3 +14,4 @@ home(그림 복수) : /gallery
 그림 수정 : /gallery/update
 그림 단일 : /gallery/<id> 
 
+test
