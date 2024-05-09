@@ -21,4 +21,5 @@ from GalleryUser import views
 
 urlpatterns = [
     path('login/', views.login),
+    path('join/', views.join),
 ]

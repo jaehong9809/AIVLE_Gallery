@@ -21,6 +21,7 @@ import GalleryUser
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', include('GalleryUser.urls')),
+    path('/', include),
+    path('auth/', include('GalleryUser.urls')),
 
 ]
