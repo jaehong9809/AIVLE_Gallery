@@ -28,8 +28,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-#AUTH_USER_MODEL = 'GalleryUser.User'
+AUTH_USER_MODEL = 'GalleryUser.User'
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+
+# 브라우져 종료시 세션 종료
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Application definition
 
