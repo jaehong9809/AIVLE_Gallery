@@ -20,6 +20,8 @@ from django.urls import path, include
 from GalleryUser import views
 
 urlpatterns = [
-    path('login/', views.login),
+    path('login/', views.gallery_login),
     path('join/', views.join),
+    path('profile/', views.user_profile),
+
 ]
