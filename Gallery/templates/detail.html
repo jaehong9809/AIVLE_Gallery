@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link type="text/css" href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Detail</title>
+</head>
+<body>
+<div class="container my-3">
+    <h2 class="border-bottom py-2">{{picture.title}}</h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{picture.image}}</div>
+            <div class="card-text" style="white-space: pre-line;">{{picture.content}}</div>
+            <div class="d-flex justify-content-end">
+                <div class="card-text"><small>작성자: {{picture.user_id}}</small></div>
+                <div class="badge bg-light text-dark p-2">
+                    {{picture.created_at}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
