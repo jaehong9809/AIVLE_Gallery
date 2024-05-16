@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from Gallery import views
 
 urlpatterns = [
+    path('<int:id>/', views.detail, name='picture-detail'),
 ]
