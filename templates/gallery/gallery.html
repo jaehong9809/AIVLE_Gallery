@@ -1,0 +1,28 @@
+{% if gallery_li %}
+    <table id="container" border="1">
+        <thead>
+            <tr>
+                <th>등록 일자</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>이미지</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for gallery in gallery_li %}
+            <a href = '#'>
+                <tr>
+                    <td width="150px"; style='text-align : center'>{{ gallery.created_at|date:"Y-m-d" }}</td>
+                    <td width="150px"; style='text-align : center'><a href = '{{ gallery.picture_id }}'>{{ gallery.title }}</a></td>
+                    
+                    <td width="150px"; style='text-align : center'><img src="{{ gallery.image.url }}" height="100px"; width="200px"></td>
+                    <td width="150px"; style='text-align : center'>{{ gallery.user_id }}</td>
+
+                </tr>
+            </a>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <h1>등록된 이미지 없음</h1>
+{% endif %}

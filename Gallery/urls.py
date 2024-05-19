@@ -20,5 +20,6 @@ from django.urls import path, include
 from Gallery import views
 
 urlpatterns = [
+    path('', views.gallery_list),
     path('<int:id>/', views.detail, name='picture-detail'),
 ]
