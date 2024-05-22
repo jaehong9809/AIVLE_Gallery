@@ -19,7 +19,12 @@ from django.urls import path, include
 
 from Gallery import views
 
+app_name = 'gallery'
+
 urlpatterns = [
-    path('', views.gallery_list),
+    path('', views.gallery_list, name='index'),
     path('<int:id>/', views.detail, name='picture-detail'),
+    path('new_register/', views.new_register, name='new_register'),
+    path('create/', views.create, name='create'),
+    path('search/', views.search, name='search')
 ]
