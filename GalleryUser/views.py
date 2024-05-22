@@ -27,7 +27,7 @@ def gallery_login(request):
         if user is not None:
             login(request, user)
             print(user, "Login", timezone.now)
-            return redirect("/auth/profile")
+            return redirect("gallery/")
 
         return redirect("/")
 
