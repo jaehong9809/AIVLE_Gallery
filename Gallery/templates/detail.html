@@ -54,8 +54,8 @@
                 <div class="likes-info">
                     <img src="{% static 'images/likes_button.png' %}" alt="likes button image" width="30" height="30"/>
                     <span>좋아요: {{ picture.love_set.count }}</span>
-                    <a href="{% url 'Gallery:update' picture.picture_id %}">[수정하기]</a>
-                    <a href="{% url 'Gallery:update' picture.picture_id %}">[삭제하기]</a>
+                    <a href="{% url 'gallery:update' picture.picture_id %}">[수정하기]</a>
+                    <a href="{% url 'gallery:update' picture.picture_id %}">[삭제하기]</a>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
                 <li>{{ comment.content }}</li>
             {% endfor %}
             </ul>
-            <form class="comment-form" action="{% url 'Gallery:create_comment' picture.picture_id %}" method="post">
+            <form class="comment-form" action="{% url 'gallery:create_comment' picture.picture_id %}" method="post">
                 {% csrf_token %}
                 <textarea name="content" id="content" rows="5" class="form-control mb-3" placeholder="댓글을 입력하세요"></textarea>
                 <button type="submit" class="btn btn-primary">댓글 입력</button>
