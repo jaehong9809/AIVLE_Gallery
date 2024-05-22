@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        img {
+            max-width: 200px;
+            max-height: 100px;
+        }
+        .new-register {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+        }
+        .new-register a {
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .new-register input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 200px;
+        }
+        .new-register a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    {% if gallery_li %}
+        <table id="container">
+            <thead>
+                <tr>
+                    <th>등록 일자</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>이미지</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for gallery in gallery_li %}
+                <tr>
+                    <td>{{ gallery.created_at|date:"Y-m-d" }}</td>
+                    <td><a href="{{ gallery.pid }}">{{ gallery.title }}</a></td>
+                    <td>{{ gallery.user_id }}</td>
+                    <td><img src="{{ gallery.image.url }}" alt="{{ gallery.title }}"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="new-register">
+            <a href="new_register">+ New</a>
+            <div>
+                <form action="{% url 'gallery:search' %}", method="get">
+                    <label for="search">Search :</label>
+                    <input type="text" id="search" name="search" placeholder="검색어를 입력하세요">
+                </form>
+                
+            </div>
+        </div>
+    {% else %}
+        <h1>등록된 이미지 없음</h1>
+    {% endif %}
+</body>
+</html>
