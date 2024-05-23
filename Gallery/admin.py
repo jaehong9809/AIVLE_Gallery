@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Picture
+from .models import *
 
 admin.site.register(Picture)
-
+admin.site.register(Comment)
 # Register your models here.

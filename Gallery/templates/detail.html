@@ -1,29 +1,86 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     {% load static %}
+    <meta charset="UTF-8">
     <link type="text/css" href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Detail</title>
+    <style>
+        .card-text img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+        .comment-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .comment-list li {
+            border-bottom: 1px solid #ddd;
+            padding: 8px 0;
+        }
+        .likes-info {
+            display: flex;
+            align-items: center;
+        }
+        .likes-info img {
+            margin-left: 10px;
+            margin-right: 5px;
+        }
+        .comment-form textarea {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-<div class="container my-3">
-    <h2 class="border-bottom py-2">{{picture.title}}</h2>
-    <div class="card my-3">
+<div class="container my-5">
+    <h2 class="border-bottom py-3">{{ picture.title }}</h2>
+    <div class="card my-4">
         <div class="card-body">
-            <div class="card-text" style="white-space: pre-line;">{{picture.image}}</div>
-            <div class="card-text" style="white-space: pre-line;">{{picture.content}}</div>
-            <div class="d-flex justify-content-end">
-                <div class="card-text"><small>작성자: {{picture.user_id}}</small></div>
-                <div class="badge bg-light text-dark p-2">
-                    {{picture.created_at}}
+            <div class="card-text mb-4">
+                <img src="data:image/jpeg;base64, {{ img }}" alt="main image">
+            </div>
+            <div class="card-text mb-4" style="white-space: pre-line;">{{ picture.content }}</div>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <small class="text-muted">작성자: {{ picture.user_id }}</small>
+                    <span class="badge bg-light text-dark">{{ picture.created_at }}</span>
+                </div>
+                <div class="likes-info">
+                    <img src="{% static 'images/likes_button.png' %}" alt="likes button image" width="30" height="30"/>
+                    <span>좋아요: {{ picture.love_set.count }}</span>
+                    <a href="{% url 'gallery:update' picture.picture_id %}">[수정하기]</a>
+                    <a href="{% url 'gallery:update' picture.picture_id %}">[삭제하기]</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- 댓글 -->
+<div class="container my-5">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="mb-4">{{ picture.comment_set.count }}개의 댓글이 있습니다.</h5>
+            <ul class="comment-list">
+            {% for comment in picture.comment_set.all %}
+                <li>{{ comment.content }}</li>
+            {% endfor %}
+            </ul>
+            <form class="comment-form" action="{% url 'gallery:create_comment' picture.picture_id %}" method="post">
+                {% csrf_token %}
+                <textarea name="content" id="content" rows="5" class="form-control mb-3" placeholder="댓글을 입력하세요"></textarea>
+                <button type="submit" class="btn btn-primary">댓글 입력</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
 </body>
 </html>
