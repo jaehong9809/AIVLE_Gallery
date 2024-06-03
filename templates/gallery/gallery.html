@@ -4,47 +4,94 @@
     <meta charset="UTF-8">
     <title>Gallery</title>
     <style>
+        header a{
+            text-decoration: none;
+            color:white
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
+            
+        }
+
+        header, footer {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
-        h1 {
-            color: #333;
+
+        footer {
+            margin-top: auto;
         }
+        
+        .nav ol {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav li {
+            display: inline;
+            padding-right: 30px;
+        }
+
+        .nav a{
+            text-decoration: none;
+            color: white;
+        }
+
+        main{
+            margin-top: 20px;
+            margin-left: 100px;
+        }
+
         table {
             width: 80%;
             border-collapse: collapse;
             margin: 20px 0;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         th, td {
             padding: 12px;
             text-align: center;
             border: 1px solid #ddd;
         }
+
         th {
             background-color: #f2f2f2;
         }
+
         tr:hover {
             background-color: #f1f1f1;
         }
+
         img {
             max-width: 200px;
             max-height: 100px;
         }
-        .new-register {
+
+        .new {
             margin-top: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 80%;
         }
-        .new-register a {
+
+        .new a {
             text-decoration: none;
             color: white;
             background-color: #007BFF;
@@ -53,52 +100,101 @@
             font-size: 16px;
             transition: background-color 0.3s;
         }
-        .new-register input[type="text"] {
+
+        .new input[type="text"] {
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 14px;
             width: 200px;
         }
-        .new-register a:hover {
+        .new a:hover {
             background-color: #0056b3;
         }
+
+        .nav{
+            display: flex;
+            right: 0px;
+        }
+
     </style>
 </head>
 <body>
-    {% if gallery_li %}
-        <table id="container">
-            <thead>
-                <tr>
-                    <th>등록 일자</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>이미지</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for gallery in gallery_li %}
-                <tr>
-                    <td>{{ gallery.created_at|date:"Y-m-d" }}</td>
-                    <td><a href="{{ gallery.pid }}">{{ gallery.title }}</a></td>
-                    <td>{{ gallery.user_id }}</td>
-                    <td><img src="{{ gallery.image.url }}" alt="{{ gallery.title }}"></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <div class="new-register">
-            <a href="new_register">+ New</a>
-            <div>
-                <form action="{% url 'gallery:search' %}", method="get">
-                    <label for="search">Search :</label>
-                    <input type="text" id="search" name="search" placeholder="검색어를 입력하세요">
-                </form>
-                
+    <header>
+        <a href="/gallery"><h1>AIVLE Gallery</h1></a>
+        <nav class="nav">
+            <ol>
+              {% if not user_logged_in %}  
+                <li><a href="#">로그인</a></li>
+                <li ><a href="#">회원 가입</a></li>
+              {% endif %}
+            
+              
+              {% if user_logged_in %}  
+                <li><a href="#">로그아웃</a></li>
+                <li><a href="#">My Page</a></li>
+              {% endif %}
+              
+            </ol>
+          </nav>
+    </header>
+
+    <main>
+        {% if gallery_li %}
+            <table id="container">
+                <thead>
+                    <tr>
+                        <th>등록 일자</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>이미지</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for gallery in gallery_li %}
+                    <tr onclick="location.href='{{ gallery.picture_id }}';" style="cursor:pointer;">
+                        <td>{{ gallery.created_at|date:"Y-m-d" }}</td>
+                        <td><a>{{ gallery.title }}</a></td>
+                        <td>{{ gallery.user_id }}</td>
+                        <td><a href="{{ gallery.picture_id }}"><img src="{{ gallery.image.url }}" height="150px" width="200px"></a></td>
+                    </tr>
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- 로그인 여부 확인 -->
+
+            
+
+            <div class="new">
+                {% comment %}
+                {% if user_logged_in %}
+                {% endcomment %}
+                <a href="new_register">+ New</a>
+                {% comment %}
+                {% endif %}
+                {% endcomment %}
+
+                <div>
+                    <form action="{% url 'gallery:search' %}", method="get">
+                        <label for="search">Search :</label>
+                        <input type="text" id="search" name="search" placeholder="검색어를 입력하세요">
+                    </form>
+                    
+                </div>
             </div>
-        </div>
-    {% else %}
-        <h1>등록된 이미지 없음</h1>
-    {% endif %}
+
+            
+        {% else %}
+            <h1>등록된 이미지 없음</h1>
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2024 My Gallery</p>
+    </footer>
 </body>
 </html>
+
+{% comment %}
+{% endcomment %}
