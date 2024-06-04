@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Picture(models.Model):
-    pid = models.IntegerField(primary_key=True, max_length=200, db_column='picture_id')
+    pid = models.IntegerField(primary_key=True,db_column='picture_id')
     title = models.CharField(max_length=200)
     image = models.ImageField()
     content = models.TextField()
@@ -10,7 +10,6 @@ class Picture(models.Model):
     user_id = models.CharField(max_length=200)
 
     class Meta:
-        managed = False
         db_table = 'picture'
 
 
