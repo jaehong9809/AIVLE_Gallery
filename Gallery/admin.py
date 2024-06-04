@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Picture
+from .models import *
 
 admin.site.register(Picture)
-
-# Register your models here.
+admin.site.register(Comment)
+admin.site.register(Love)

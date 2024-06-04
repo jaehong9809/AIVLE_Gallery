@@ -23,8 +23,13 @@ app_name = 'gallery'
 
 urlpatterns = [
     path('', views.gallery_list, name='index'),
-    path('<int:id>/', views.detail, name='picture-detail'),
+    path('<int:picture_id>/', views.detail, name='detail'),
+    path('comment/create/<int:picture_id>/', views.create_comment, name='create_comment'),
+    path('comment/delete/<int:picture_id>/<int:comment_id>/', views.delete_comment, name='delete_comment'),
+    path('love/create/<int:picture_id>/', views.create_love, name='create_love'),
+    path('<int:picture_id>/update/', views.update_post, name='update'),
+    path('<int:picture_id>/delete/', views.delete_post, name='delete'),
     path('new_register/', views.new_register, name='new_register'),
     path('create/', views.create, name='create'),
-    path('search/', views.search, name='search')
+    path('search/', views.search, name='search'),
 ]
