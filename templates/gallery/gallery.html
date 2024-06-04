@@ -80,7 +80,7 @@
                 {% for gallery in gallery_li %}
                 <tr>
                     <td>{{ gallery.created_at|date:"Y-m-d" }}</td>
-                    <td><a href="{{ gallery.pid }}">{{ gallery.title }}</a></td>
+                    <td><a href="{{ gallery.picture_id }}">{{ gallery.title }}</a></td>
                     <td>{{ gallery.user_id }}</td>
                     <td><img src="{{ gallery.image.url }}" alt="{{ gallery.title }}"></td>
                 </tr>
