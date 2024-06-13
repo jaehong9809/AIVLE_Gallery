@@ -19,11 +19,11 @@
                         <h3 class="text-center">Login</h3>
                     </div>
                     <div class="card-body">
-                        {% for message in messages %}
-                        <div class="mb-3 bg-danger text-white text-center p-1">
-                            {{ message.message }}
-                        </div>
-                        {% endfor %}
+<!--                        {% for message in messages %}-->
+<!--                        <div class="mb-3 bg-danger text-white text-center p-1">-->
+<!--                            {{ message.message }}-->
+<!--                        </div>-->
+<!--                        {% endfor %}-->
                         <form method="post">
                             {% csrf_token %}
                             <div class="mb-3">
@@ -51,8 +51,7 @@
                         <div class="text-center">
                             <p class="text-secondary small">간단 로그인</p>
                             {% if user.is_authenticated %}
-                            <a href="{% url 'account_logout' %}?next=/auth/login">로그아웃</a>
-                            {{ user.username }} 님이 활동중
+                            <h5>{{ user.username }} 님이 활동중 <a href="{% url 'galleryuser:logout' %}">"로그아웃"</a></h5>
                             {% else %}
                             <a href="{% provider_login_url 'google' %}">
                                 <img src="/static/img/web_light_rd_na@2x.png" alt="구글" width="50px" height="50px"/>

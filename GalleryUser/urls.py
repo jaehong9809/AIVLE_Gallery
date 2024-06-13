@@ -19,9 +19,13 @@ from django.urls import path, include
 
 from GalleryUser import views
 
+app_name = 'galleryuser'
+
 urlpatterns = [
-    path('login/', views.gallery_login),
+    path('login/', views.gallery_login, name = "da"),
     path('join/', views.join),
     path('profile/', views.user_profile),
     path('profile/update', views.user_profile_update),
+    path('logout/', views.user_logout, name='logout'),
+
 ]

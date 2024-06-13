@@ -11,10 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 # mysql 설치 오류
-import pymysql
 from django.contrib import messages
 
-pymysql.install_as_MySQLdb()
 
 from pathlib import Path
 import db_settings
@@ -165,11 +163,9 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/gallery'
-LOGOUT_REDIRECT_URL = '/gallery'
+
 SOCIALACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
-SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
 SOCIALACCOUNT_QUERY_EMAIL = True
 
-SOCIAL_AUTH_LOGOUT_URL_PARAMETER = 'next'

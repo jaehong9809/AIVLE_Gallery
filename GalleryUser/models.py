@@ -45,7 +45,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         db_table = 'user'
-        managed=False
 
     @property
     def is_staff(self):

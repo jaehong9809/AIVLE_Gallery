@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from GalleryUser.models import User, UserManager
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
@@ -65,7 +65,7 @@ def user_profile(request):
 
     return render(request, "profile.html", context)
 
-@login_required()
+@login_required
 @csrf_exempt
 def user_profile_update(request):
     if request.method == "GET":
@@ -82,4 +82,9 @@ def user_profile_update(request):
         user.save()
 
         return redirect('/auth/profile')
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect("/gallery")
 
